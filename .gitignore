@@ -1,0 +1,10 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Arquivos compactados
+*.zip
+
+# Arquivos de ambiente
+*.env 
