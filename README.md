@@ -4,23 +4,16 @@ Este projeto demonstra a implementação de infraestrutura como código usando T
 
 ## Pré-requisitos
 
-Antes de executar este projeto, certifique-se de ter:
-
 - **Terraform** instalado (versão 1.0 ou superior)
 - **Conta AWS** ativa
 - **Chaves de acesso AWS** criadas (Access Key ID e Secret Access Key)
-- **Git** instalado
-
-### Instalação do Terraform
-
-Para instalar o Terraform, visite: https://www.terraform.io/downloads
 
 ## Como usar
 
 ### 1. Clone o repositório
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/SpawNpoa/DevOps.git
 cd DevOps
 ```
 
@@ -31,11 +24,12 @@ Crie um arquivo `terraform.tfvars` na pasta `infra/` com suas credenciais:
 ```hcl
 aws_access_key = "sua_access_key_aqui"
 aws_secret_key = "sua_secret_key_aqui"
+bucket_name    = "meu-bucket-devops-unico"
+environment    = "dev"
+aws_region     = "us-east-1"
 ```
 
 ### 3. Execute os comandos Terraform
-
-Navegue para a pasta `infra/` e execute os seguintes comandos:
 
 ```bash
 cd infra
@@ -56,23 +50,13 @@ terraform apply
 terraform destroy
 ```
 
-## Configuração do GitHub Actions
+## Pipeline de CI
 
-### Adicionar Secrets no GitHub
+O pipeline GitHub Actions está configurado em `.github/workflows/ci.yml` e executa automaticamente:
 
-1. Vá para seu repositório no GitHub
-2. Acesse **Settings** > **Secrets and variables** > **Actions**
-3. Clique em **New repository secret**
-4. Adicione os seguintes secrets:
-   - `AWS_ACCESS_KEY_ID`: Sua AWS Access Key ID
-   - `AWS_SECRET_ACCESS_KEY`: Sua AWS Secret Access Key
-
-### Pipeline CI
-
-O pipeline GitHub Actions está configurado para:
-- Executar automaticamente em **push** na branch **main**
-- Fazer checkout do código
-- Exibir a mensagem "CI rodando com sucesso!"
+- ✅ Validação de código Terraform
+- ✅ Verificação de formatação
+- ✅ Testes de estrutura do projeto
 
 ## Estrutura do Projeto
 
@@ -86,19 +70,15 @@ DevOps/
 │   ├── provider.tf
 │   ├── variables.tf
 │   └── outputs.tf
-├── .gitignore
 └── README.md
 ```
 
 ## Recursos Criados
 
-- **Bucket S3**: Criado com o nome especificado na variável `bucket_name`
-- **Tags**: Name = "Bucket DevOps", Environment = "Dev"
+- **Amazon S3 Bucket** com criptografia AES256
+- **Versionamento** habilitado
+- **Bloqueio de acesso público**
 
 ## Segurança
 
-⚠️ **Importante**: Nunca commite suas credenciais AWS diretamente no código. Sempre use variáveis de ambiente ou arquivos `.tfvars` que estejam no `.gitignore`.
-
-## Suporte
-
-Para dúvidas ou problemas, abra uma issue no repositório. 
+⚠️ **Importante**: Nunca commite suas credenciais AWS diretamente no código. Sempre use arquivos `.tfvars` que estejam no `.gitignore`. 
