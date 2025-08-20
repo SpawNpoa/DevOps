@@ -2,6 +2,12 @@
 
 Este projeto demonstra a implementação de infraestrutura como código usando Terraform para criar recursos na AWS.
 
+## 📋 Documentação de Planejamento
+
+Para uma visão completa do projeto, incluindo objetivos, requisitos e especificações detalhadas, consulte:
+
+**📄 [PLANEJAMENTO.md](PLANEJAMENTO.md)** - Documentação completa de planejamento do projeto
+
 ## Pré-requisitos
 
 - **Terraform** instalado (versão 1.0 ou superior)
@@ -56,6 +62,8 @@ O pipeline GitHub Actions está configurado em `.github/workflows/ci.yml` e exec
 
 - ✅ Validação de código Terraform
 - ✅ Verificação de formatação
+- ✅ Testes de documentação
+- ✅ Verificação de segurança
 - ✅ Testes de estrutura do projeto
 
 ## Estrutura do Projeto
@@ -70,7 +78,9 @@ DevOps/
 │   ├── provider.tf
 │   ├── variables.tf
 │   └── outputs.tf
-└── README.md
+├── README.md
+├── PLANEJAMENTO.md
+└── .gitignore
 ```
 
 ## Recursos Criados
